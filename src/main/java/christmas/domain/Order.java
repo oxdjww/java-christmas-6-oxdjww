@@ -1,0 +1,68 @@
+package christmas.domain;
+
+import static christmas.exception.constants.ErrorMessage.INVALID_ORDER;
+
+import christmas.exception.EventPlannerException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Order {
+    public static final int MAXIMUM_ORDER_COUNT = 20;
+    private List<OrderItem> orderItems;
+    private int orderCount;
+
+    private Order(final String orderItems) {
+        this.orderItems = validate(orderItems);
+    }
+
+    public static Order of(final String orderItems) {
+        return new Order(orderItems);
+    }
+
+    private List<OrderItem> validate(String orderItems) {
+        List<OrderItem> validFormatMenu = validateFormat(orderItems);
+        validateDuplicateDish(validFormatMenu);
+        validateOrderAmount(validFormatMenu);
+        return validFormatMenu;
+    }
+
+    private List<OrderItem> validateFormat(String orderItems) {
+        try {
+            List<String> order = new ArrayList<>(Arrays.asList(orderItems.split(",")));
+
+            return order.stream()
+                    .map(OrderItem::of)
+                    .toList();
+        } catch (NumberFormatException e) {
+            throw EventPlannerException.of(INVALID_ORDER);
+        }
+    }
+
+    private void validateDuplicateDish(List<OrderItem> validFormatMenu) {
+        if (!validFormatMenu.stream()
+                .collect(Collectors.groupingBy(orderItem -> orderItem.getDish().getName(),
+                        Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toSet())
+                .isEmpty()) {
+            throw EventPlannerException.of(INVALID_ORDER);
+        }
+    }
+
+    private void validateOrderAmount(List<OrderItem> validFormatMenu) {
+        int orderCount = validFormatMenu.stream()
+                .mapToInt(OrderItem::getCount)
+                .sum();
+
+        if (orderCount > MAXIMUM_ORDER_COUNT) {
+            throw EventPlannerException.of(INVALID_ORDER);
+        }
+        this.orderCount = orderCount;
+    }
+}
