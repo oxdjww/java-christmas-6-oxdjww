@@ -10,4 +10,8 @@ public class OutputView {
     public static void printMessage(final ViewConstants vc) {
         System.out.println(vc.getMessage());
     }
+
+    public static void printErrorMessage(final Exception e) {
+        System.out.println(e.getMessage());
+    }
 }
