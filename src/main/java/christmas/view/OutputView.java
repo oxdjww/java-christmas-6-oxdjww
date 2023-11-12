@@ -7,8 +7,7 @@ public class OutputView {
         System.out.println("<주문 메뉴>");
         // ...
     }
-
-    public static void printMessage(ViewConstants vc) {
+    public static void printMessage(final ViewConstants vc) {
         System.out.println(vc.getMessage());
     }
 }
