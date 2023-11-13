@@ -5,13 +5,13 @@ public enum Badge {
     트리(10000),
     산타(20000),
     ;
-    private final int benefitAmout;
+    private final int benefitAmount;
 
     Badge(final int benefitAmount) {
-        this.benefitAmout = benefitAmount;
+        this.benefitAmount = benefitAmount;
     }
 
     public int getBenefitAmout() {
-        return this.benefitAmout;
+        return this.benefitAmount;
     }
 }
