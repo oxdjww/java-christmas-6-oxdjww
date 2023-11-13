@@ -14,11 +14,13 @@ import java.util.List;
 public class Date {
     private final int date;
     private final DayOfWeek day;
+    private final boolean isSpecialDay;
 
     private Date(final String date) {
         validate(date);
         this.date = Integer.parseInt(date);
         this.day = defineDay(this.date);
+        this.isSpecialDay = defineSpecialDay(this.date);
     }
 
     public static Date of(final String date) {
@@ -53,11 +55,20 @@ public class Date {
         return days.get(calendar.get(Calendar.DAY_OF_WEEK) - 1);
     }
 
+    private boolean defineSpecialDay(int date) {
+        List<Integer> specialDays = List.of(3, 10, 17, 24, 31);
+        return specialDays.contains(date);
+    }
+
     public int getDate() {
         return this.date;
     }
 
     public DayOfWeek getDay() {
         return this.day;
+    }
+
+    public boolean isSpecialDay() {
+        return this.isSpecialDay;
     }
 }
