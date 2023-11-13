@@ -42,7 +42,7 @@ class OrderTest {
     }
 
     private void assertInvalidOrder(String orderString) {
-        assertThatThrownBy(() -> Order.of(orderString))
+        assertThatThrownBy(() -> Order.from(orderString, Date.of("1")))
                 .isInstanceOf(EventPlannerException.class)
                 .hasMessageContaining(INVALID_ORDER.getMessage());
     }
