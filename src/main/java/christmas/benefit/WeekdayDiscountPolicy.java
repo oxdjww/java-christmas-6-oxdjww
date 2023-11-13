@@ -1,5 +1,7 @@
 package christmas.benefit;
 
+import static christmas.benefit.BenefitConfig.WEEKDAY_DISCOUNT_UNIT;
+
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.constants.DayOfWeek;
@@ -20,7 +22,7 @@ public class WeekdayDiscountPolicy implements DiscountPolicy {
                 || date.getDay().equals(DayOfWeek.WED)
                 || date.getDay().equals(DayOfWeek.THU)
         ) {
-            weekdayDiscountAmount = 2023 * order.getMaindishCount();
+            weekdayDiscountAmount = WEEKDAY_DISCOUNT_UNIT.getValue() * order.getMaindishCount();
         }
 
     }

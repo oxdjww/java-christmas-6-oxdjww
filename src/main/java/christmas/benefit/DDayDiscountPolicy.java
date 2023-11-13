@@ -1,22 +1,25 @@
 package christmas.benefit;
 
+import static christmas.benefit.BenefitConfig.DDAY_DEFAULT_DISCOUNT_AMOUNT;
+import static christmas.benefit.BenefitConfig.EVENT_DATE;
+import static christmas.benefit.BenefitConfig.START_OF_EVENT_MONTH;
+
 import christmas.domain.Date;
 
 public class DDayDiscountPolicy implements DiscountPolicy {
     private Date date;
     private int dDayDiscountAmount;
-    private static final int DEFAULT_DISCOUNT_AMOUNT = 1000;
 
     public DDayDiscountPolicy() {
         this.dDayDiscountAmount = 0;
     }
 
     public DDayDiscountPolicy(Date date) {
-        if (date.getDate() > 25) {
+        if (date.getDate() > EVENT_DATE.getValue()) {
             this.dDayDiscountAmount = 0;
         }
-        if (date.getDate() >= 1 && date.getDate() <= 25) {
-            this.dDayDiscountAmount = DEFAULT_DISCOUNT_AMOUNT + (date.getDate() - 1) * 100;
+        if (date.getDate() >= START_OF_EVENT_MONTH.getValue() && date.getDate() <= EVENT_DATE.getValue()) {
+            this.dDayDiscountAmount = DDAY_DEFAULT_DISCOUNT_AMOUNT.getValue() + (date.getDate() - 1) * 100;
         }
     }
 

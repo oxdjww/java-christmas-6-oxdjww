@@ -1,5 +1,7 @@
 package christmas.benefit;
 
+import static christmas.benefit.BenefitConfig.SPECIAL_DISCOUNT_AMOUNT;
+
 import christmas.domain.Date;
 
 public class SpecialDiscountPolicy implements DiscountPolicy{
@@ -12,7 +14,7 @@ public class SpecialDiscountPolicy implements DiscountPolicy{
 
     public SpecialDiscountPolicy(Date date) {
         if (date.isSpecialDay()) {
-            specialDiscountAmount = 1000;
+            specialDiscountAmount = SPECIAL_DISCOUNT_AMOUNT.getValue();
         }
     }
 

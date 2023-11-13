@@ -1,5 +1,7 @@
 package christmas.benefit;
 
+import static christmas.benefit.BenefitConfig.WEEKEND_DISCOUNT_UNIT;
+
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.constants.DayOfWeek;
@@ -15,7 +17,7 @@ public class WeekendDiscountPolicy implements DiscountPolicy{
     public WeekendDiscountPolicy(Date date, Order order) {
         if (date.getDay().equals(DayOfWeek.FRI)
                 || date.getDay().equals(DayOfWeek.SAT)) {
-            weekEndDiscountAmount = 2023 * order.getDessertCount();
+            weekEndDiscountAmount = WEEKEND_DISCOUNT_UNIT.getValue() * order.getDessertCount();
         }
     }
     @Override

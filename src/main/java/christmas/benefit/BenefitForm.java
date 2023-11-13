@@ -1,5 +1,7 @@
 package christmas.benefit;
 
+import static christmas.benefit.BenefitConfig.MINIMUM_EVENT_ORDER_AMOUNT;
+
 import christmas.domain.Date;
 import christmas.domain.Order;
 
@@ -36,7 +38,7 @@ public class BenefitForm {
     }
 
     public static BenefitForm of(final Date date, final Order order) {
-        if ( order.getTotalOrderAmount() < 10000) {
+        if ( order.getTotalOrderAmount() < MINIMUM_EVENT_ORDER_AMOUNT.getValue()) {
             return new BenefitForm();
         }
         return new BenefitForm(date, order);
