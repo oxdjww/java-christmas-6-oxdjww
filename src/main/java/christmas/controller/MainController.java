@@ -17,10 +17,12 @@ import static christmas.view.constants.ViewConstants.WELCOME_MESSAGE;
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.exception.EventPlannerException;
+import christmas.service.DateService;
 import christmas.service.OrderService;
 
 public class MainController {
     OrderService orderService = new OrderService();
+    DateService dateService = new DateService();
 
     public void run() {
         printMessage(WELCOME_MESSAGE);
@@ -49,7 +51,7 @@ public class MainController {
     private Date generateDate() {
         while (true) {
             try {
-                return Date.of(readDate());
+                return dateService.createDate(readDate());
             } catch (EventPlannerException e) {
                 printErrorMessage(e);
             }
