@@ -5,7 +5,7 @@ import static christmas.exception.constants.ErrorMessage.INVALID_ORDER;
 import christmas.domain.dish.appetizer.CaesarSalad;
 import christmas.domain.dish.appetizer.MushroomSoup;
 import christmas.domain.dish.appetizer.Tapas;
-import christmas.domain.dish.beverage.Chanpagne;
+import christmas.domain.dish.beverage.Champagne;
 import christmas.domain.dish.beverage.Redwine;
 import christmas.domain.dish.beverage.Zerocoke;
 import christmas.domain.dish.dessert.ChocolateCake;
@@ -34,7 +34,7 @@ public class DishGenerator {
         dishMap.put("아이스크림", Icecream::create);
         dishMap.put("제로콜라", Zerocoke::create);
         dishMap.put("레드와인", Redwine::create);
-        dishMap.put("샴페인", Chanpagne::create);
+        dishMap.put("샴페인", Champagne::create);
     }
 
     public static Dish of(String name) {
