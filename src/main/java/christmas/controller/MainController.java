@@ -34,6 +34,8 @@ public class MainController {
         printTotalOrderAmount(order);
 
         printGift(order.getBenefitForm());
+
+        printBenefitForm(order.getBenefitForm());
     }
 
     private Date generateDate() {
