@@ -18,6 +18,7 @@ import christmas.discount.BenefitForm;
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
+import christmas.domain.constants.Badge;
 import christmas.view.constants.ViewConstants;
 import java.util.List;
 
@@ -64,9 +65,7 @@ public class OutputView {
 
         for (int i = 0; i < length; i++) {
             formattedNumber.append(numberStr.charAt(i));
-
-            int remainingDigits = length - i - 1;
-            if (remainingDigits > 0 && remainingDigits % 3 == 0) {
+            if ((length - i - 1) % 3 == 0 && i < length - 1) {
                 formattedNumber.append(',');
             }
         }
@@ -104,23 +103,7 @@ public class OutputView {
             return;
         }
 
-        StringBuilder formattedDiscounts = new StringBuilder();
-
-        if (benefitForm.getDDayDiscountAmount() > 0) {
-            formattedDiscounts.append(String.format("크리스마스 디데이 할인: %s원\n", formatNumberWithComma(Math.negateExact(benefitForm.getDDayDiscountAmount()))));
-        }
-        if (benefitForm.getWeekDayDiscountAmount() > 0) {
-            formattedDiscounts.append(String.format("평일 할인: %s원\n", formatNumberWithComma(Math.negateExact(benefitForm.getWeekDayDiscountAmount()))));
-        }
-        if (benefitForm.getSpecialDiscountAmount() > 0) {
-            formattedDiscounts.append(String.format("특별 할인: %s원\n", formatNumberWithComma(Math.negateExact(benefitForm.getSpecialDiscountAmount()))));
-        }
-        if (benefitForm.getWeekendDiscountAmount() > 0) {
-            formattedDiscounts.append(String.format("주말 할인: %s원\n", formatNumberWithComma(Math.negateExact(benefitForm.getWeekendDiscountAmount()))));
-        }
-        if (benefitForm.getFreeChampagneDiscountAmount() > 0) {
-            formattedDiscounts.append(String.format("증정 이벤트: %s원\n", formatNumberWithComma(Math.negateExact(benefitForm.getFreeChampagneDiscountAmount()))));
-        }
+        StringBuilder formattedDiscounts = generateBenefitForm(benefitForm);
 
         System.out.println(formattedDiscounts);
     }
@@ -133,32 +116,54 @@ public class OutputView {
                 benefitForm.getFreeChampagneDiscountAmount() == 0;
     }
 
+    private static StringBuilder generateBenefitForm(BenefitForm benefitForm) {
+        StringBuilder formattedDiscounts = new StringBuilder();
+
+        appendDiscount(formattedDiscounts, "크리스마스 디데이 할인", benefitForm.getDDayDiscountAmount());
+        appendDiscount(formattedDiscounts, "평일 할인", benefitForm.getWeekDayDiscountAmount());
+        appendDiscount(formattedDiscounts, "특별 할인", benefitForm.getSpecialDiscountAmount());
+        appendDiscount(formattedDiscounts, "주말 할인", benefitForm.getWeekendDiscountAmount());
+        appendDiscount(formattedDiscounts, "증정 이벤트", benefitForm.getFreeChampagneDiscountAmount());
+
+        return formattedDiscounts;
+    }
+
+    private static void appendDiscount(StringBuilder stringBuilder, String label, int discountAmount) {
+        if (discountAmount > 0) {
+            stringBuilder.append(
+                    String.format("%s: %s원\n", label, formatNumberWithComma(Math.negateExact(discountAmount))));
+        }
+    }
+
     public static void printTotalBenefitAmount(final BenefitForm benefitForm) {
         printMessage(TOTAL_BENEFIT_AMOUNT_MESSAGE);
-        System.out.println(String.format("%s원\n",formatNumberWithComma(Math.negateExact(benefitForm.getTotalBenefitAmount()))));
+        System.out.println(
+                String.format("%s원\n", formatNumberWithComma(Math.negateExact(benefitForm.getTotalBenefitAmount()))));
     }
 
     public static void printFinalPaymentAmount(final Order order) {
         printMessage(FINAL_PAYMENT_AMOUNT_MESSAGE);
-        System.out.println(String.format("%s원\n",formatNumberWithComma(order.getTotalOrderAmount() - order.getBenefitForm().getTotalDiscountAmount())));
+        System.out.println(String.format("%s원\n",
+                formatNumberWithComma(order.getTotalOrderAmount() - order.getBenefitForm().getTotalDiscountAmount())));
     }
 
     public static void printBadge(final Order order) {
         printMessage(BADGE_NOTICE_MESSAGE);
-        if (order.getBenefitForm().getTotalBenefitAmount() > 산타.getBenefitAmout()) {
-            System.out.println(산타.name());
+        if (order.getBenefitForm().getTotalBenefitAmount() < 별.getBenefitAmout()) {
+            printNothing();
             return;
         }
-        if (order.getBenefitForm().getTotalBenefitAmount() > 트리.getBenefitAmout()) {
-            System.out.println(트리.name());
-            return;
-        }
-        if (order.getBenefitForm().getTotalBenefitAmount() > 별.getBenefitAmout()) {
-            System.out.println(별.name());
-            return;
-        }
-        printNothing();
+        printBadgeIfAmountIsHigher(order.getBenefitForm().getTotalBenefitAmount(), 산타);
+        printBadgeIfAmountIsHigher(order.getBenefitForm().getTotalBenefitAmount(), 트리);
+        printBadgeIfAmountIsHigher(order.getBenefitForm().getTotalBenefitAmount(), 별);
     }
+
+    private static void printBadgeIfAmountIsHigher(final int totalBenefitAmount, final Badge badge) {
+        if (totalBenefitAmount > badge.getBenefitAmout()) {
+            System.out.println(badge.name());
+        }
+    }
+
 
     private static void printNothing() {
         printMessage(NOTHING_MESSAGE);
