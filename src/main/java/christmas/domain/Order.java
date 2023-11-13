@@ -13,8 +13,7 @@ import java.util.stream.Collectors;
 
 public class Order {
     public static final int MAXIMUM_ORDER_COUNT = 20;
-    private List<OrderItem> orderItems;
-    private int orderCount;
+    private final List<OrderItem> orderItems;
     private int totalOrderAmount;
 
     private Order(final String orderItems) {
@@ -63,11 +62,9 @@ public class Order {
         int orderCount = validFormatMenu.stream()
                 .mapToInt(OrderItem::getCount)
                 .sum();
-
         if (orderCount > MAXIMUM_ORDER_COUNT) {
             throw EventPlannerException.of(INVALID_ORDER);
         }
-        this.orderCount = orderCount;
     }
 
     private void validateOnlyBeverage(List<OrderItem> validFormatMenu) {
