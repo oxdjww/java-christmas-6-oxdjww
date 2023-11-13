@@ -17,7 +17,7 @@ class WeekdayDiscountPolicyTest {
     @DisplayName("평일 할인이 평일 날짜에 대해 올바르게 계산됩니다.")
     void calculateWeekdayDiscountAmountOnWeekday() {
         // given
-        Date mockDate = createMockDate(DayOfWeek.MON, false);
+        Date mockDate = createMockDate(DayOfWeek.MON, true);
         Order mockOrder = createMockOrder(3);
 
         // when
@@ -43,9 +43,9 @@ class WeekdayDiscountPolicyTest {
         assertEquals(0, actualDiscount);
     }
 
-    private Date createMockDate(DayOfWeek dayOfWeek, boolean isWeekend) {
+    private Date createMockDate(DayOfWeek dayOfWeek, boolean isWeekendOrWeekDay) {
         Date mockDate = mock(Date.class);
-        when(mockDate.getWeekDay(dayOfWeek)).thenReturn(isWeekend);
+        when(mockDate.getWeekDay(dayOfWeek)).thenReturn(isWeekendOrWeekDay);
         return mockDate;
     }
 
