@@ -1,9 +1,9 @@
 package christmas.domain.constants;
 
 public enum Badge {
-    별(5000),
-    트리(10000),
-    산타(20000),
+    별(5_000),
+    트리(10_000),
+    산타(20_000),
     ;
     private final int benefitAmount;
 
