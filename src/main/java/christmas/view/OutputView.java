@@ -26,4 +26,27 @@ public class OutputView {
             System.out.println(formattedLine);
         }
     }
+
+    public static void printTotalOrderAmount(final Order order) {
+        System.out.println("<할인 전 총주문 금액>");
+        System.out.println(formatNumberWithComma(order.getTotalOrderAmount()) + "원");
+    }
+
+    public static String formatNumberWithComma(int number) {
+        String numberStr = String.valueOf(number);
+        int length = numberStr.length();
+
+        StringBuilder formattedNumber = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            formattedNumber.append(numberStr.charAt(i));
+
+            int remainingDigits = length - i - 1;
+            if (remainingDigits > 0 && remainingDigits % 3 == 0) {
+                formattedNumber.append(',');
+            }
+        }
+
+        return formattedNumber.toString();
+    }
 }

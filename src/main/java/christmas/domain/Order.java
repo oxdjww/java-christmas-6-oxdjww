@@ -15,6 +15,7 @@ public class Order {
     public static final int MAXIMUM_ORDER_COUNT = 20;
     private List<OrderItem> orderItems;
     private int orderCount;
+    private int totalOrderAmount;
 
     private Order(final String orderItems) {
         this.orderItems = validate(orderItems);
@@ -79,5 +80,12 @@ public class Order {
 
     public List<OrderItem> getOrderItems() {
         return Collections.unmodifiableList(this.orderItems);
+    }
+
+    public int getTotalOrderAmount() {
+        return (int) orderItems.stream()
+                .mapToDouble(orderItem ->
+                        orderItem.getDish().getPrice() * orderItem.getCount())
+                .sum();
     }
 }

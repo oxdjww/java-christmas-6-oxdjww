@@ -5,6 +5,7 @@ import static christmas.view.InputView.readOrder;
 import static christmas.view.OutputView.printErrorMessage;
 import static christmas.view.OutputView.printMessage;
 import static christmas.view.OutputView.printOrder;
+import static christmas.view.OutputView.printTotalOrderAmount;
 import static christmas.view.constants.ViewConstants.WELCOME_MESSAGE;
 
 import christmas.domain.Date;
@@ -23,6 +24,8 @@ public class MainController {
         Order order = generateOrder();
 
         printOrder(order);
+
+        printTotalOrderAmount(order);
     }
 
     private Date generateDate() {
