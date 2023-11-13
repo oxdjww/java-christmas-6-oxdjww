@@ -64,6 +64,10 @@ public class Date {
         return this.date >= startDate && this.date <= dueDate;
     }
 
+    public boolean getWeekDay(DayOfWeek dayOfWeek) {
+        return this.day.equals(dayOfWeek);
+    }
+
     public int getDate() {
         return this.date;
     }
