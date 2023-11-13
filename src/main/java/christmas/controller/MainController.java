@@ -54,22 +54,20 @@ public class MainController {
     }
 
     private Date generateDate() {
-        while (true) {
-            try {
-                return dateService.createDate(readDate());
-            } catch (EventPlannerException e) {
-                printErrorMessage(e);
-            }
+        try {
+            return dateService.createDate(readDate());
+        } catch (EventPlannerException e) {
+            printErrorMessage(e);
+            return generateDate();
         }
     }
 
     private Order generateOrder(final Date date) {
-        while (true) {
-            try {
-                return orderService.createOrder(readOrder(), date);
-            } catch (EventPlannerException e) {
-                printErrorMessage(e);
-            }
+        try {
+            return orderService.createOrder(readOrder(), date);
+        } catch (EventPlannerException e) {
+            printErrorMessage(e);
+            return generateOrder(date);
         }
     }
 }
