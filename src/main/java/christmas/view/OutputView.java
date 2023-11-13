@@ -122,4 +122,10 @@ public class OutputView {
         System.out.println(String.format("%s원\n",formatNumberWithComma(Math.negateExact(benefitForm.getTotalBenefitAmount()))));
         printNewLine();
     }
+
+    public static void printFinalPaymentAmount(final Order order) {
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(String.format("%s원\n",formatNumberWithComma(order.getTotalOrderAmount() - order.getBenefitForm().getTotalDiscountAmount())));
+        printNewLine();
+    }
 }

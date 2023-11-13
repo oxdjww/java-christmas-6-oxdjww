@@ -1,6 +1,7 @@
 package christmas.discount;
 
 import christmas.domain.Date;
+import christmas.domain.Order;
 import christmas.domain.constants.DayOfWeek;
 
 public class WeekendDiscountPolicy implements DiscountPolicy{
@@ -11,10 +12,10 @@ public class WeekendDiscountPolicy implements DiscountPolicy{
         this.weekEndDiscountAmount = 0;
     }
 
-    public WeekendDiscountPolicy(Date date) {
+    public WeekendDiscountPolicy(Date date, Order order) {
         if (date.getDay().equals(DayOfWeek.FRI)
                 || date.getDay().equals(DayOfWeek.SAT)) {
-            weekEndDiscountAmount = 2023;
+            weekEndDiscountAmount = 2023 * order.getDessertCount();
         }
     }
     @Override

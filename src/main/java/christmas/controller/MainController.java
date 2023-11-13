@@ -2,9 +2,10 @@ package christmas.controller;
 
 import static christmas.view.InputView.readDate;
 import static christmas.view.InputView.readOrder;
-import static christmas.view.OutputView.printBenefitNotice;
 import static christmas.view.OutputView.printBenefitForm;
+import static christmas.view.OutputView.printBenefitNotice;
 import static christmas.view.OutputView.printErrorMessage;
+import static christmas.view.OutputView.printFinalPaymentAmount;
 import static christmas.view.OutputView.printGift;
 import static christmas.view.OutputView.printMessage;
 import static christmas.view.OutputView.printOrder;
@@ -16,7 +17,6 @@ import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.exception.EventPlannerException;
 import christmas.service.OrderService;
-import christmas.view.OutputView;
 
 public class MainController {
     OrderService orderService = new OrderService();
@@ -39,6 +39,8 @@ public class MainController {
         printBenefitForm(order.getBenefitForm());
 
         printTotalBenefitAmount(order.getBenefitForm());
+
+        printFinalPaymentAmount(order);
     }
 
     private Date generateDate() {

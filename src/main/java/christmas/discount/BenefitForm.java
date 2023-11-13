@@ -1,6 +1,7 @@
 package christmas.discount;
 
 import christmas.domain.Date;
+import christmas.domain.Order;
 
 public class BenefitForm {
     private final DDayDiscountPolicy dDayDiscountPolicy;
@@ -19,12 +20,12 @@ public class BenefitForm {
         this.totalBenefitAmount = 0;
     }
 
-    public BenefitForm(final Date date, int totalOrderAmount) {
+    public BenefitForm(final Date date, final Order order) {
         this.dDayDiscountPolicy = new DDayDiscountPolicy(date);
-        this.weekdayDiscountPolicy = new WeekdayDiscountPolicy(date);
-        this.weekendDiscountPolicy = new WeekendDiscountPolicy(date);
+        this.weekdayDiscountPolicy = new WeekdayDiscountPolicy(date,order);
+        this.weekendDiscountPolicy = new WeekendDiscountPolicy(date,order);
         this.specialDiscountPolicy = new SpecialDiscountPolicy(date);
-        this.freeChampagnePolicy = new FreeChampagnePolicy(totalOrderAmount);
+        this.freeChampagnePolicy = new FreeChampagnePolicy(order.getTotalOrderAmount());
         this.totalBenefitAmount =
                 dDayDiscountPolicy.getDiscountAmount()
                         + weekdayDiscountPolicy.getDiscountAmount()
@@ -33,11 +34,11 @@ public class BenefitForm {
                         + freeChampagnePolicy.getDiscountAmount();
     }
 
-    public static BenefitForm of(final Date date, final int totalOrderAmount) {
-        if (totalOrderAmount < 10000) {
+    public static BenefitForm of(final Date date, final Order order) {
+        if ( order.getTotalOrderAmount() < 10000) {
             return new BenefitForm();
         }
-        return new BenefitForm(date, totalOrderAmount);
+        return new BenefitForm(date, order);
     }
 
     public int getDDayDiscountAmount() {
@@ -62,5 +63,9 @@ public class BenefitForm {
 
     public int getTotalBenefitAmount() {
         return this.totalBenefitAmount;
+    }
+
+    public int getTotalDiscountAmount() {
+        return this.totalBenefitAmount - getFreeChampagneDiscountAmount();
     }
 }

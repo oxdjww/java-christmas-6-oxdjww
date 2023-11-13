@@ -4,6 +4,8 @@ import static christmas.domain.constants.Category.BEVERAGE;
 import static christmas.exception.constants.ErrorMessage.INVALID_ORDER;
 
 import christmas.discount.BenefitForm;
+import christmas.domain.constants.Category;
+import christmas.domain.dish.Dish;
 import christmas.exception.EventPlannerException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +21,7 @@ public class Order {
 
     private Order(final String orderItems, final Date date) {
         this.orderItems = validate(orderItems);
-        this.benefitForm = BenefitForm.of(date, getTotalOrderAmount());
+        this.benefitForm = BenefitForm.of(date, this);
     }
 
     public static Order from(final String orderItems, final Date date) {
@@ -90,5 +92,21 @@ public class Order {
 
     public BenefitForm getBenefitForm() {
         return this.benefitForm;
+    }
+
+    public int getMaindishCount() {
+        return (int) orderItems.stream()
+                .map(OrderItem::getDish)
+                .map(Dish::getCategory)
+                .filter(Category.MAINDISH::equals)
+                .count();
+    }
+
+    public int getDessertCount() {
+        return (int) orderItems.stream()
+                .map(OrderItem::getDish)
+                .map(Dish::getCategory)
+                .filter(Category.DESSERT::equals)
+                .count();
     }
 }
