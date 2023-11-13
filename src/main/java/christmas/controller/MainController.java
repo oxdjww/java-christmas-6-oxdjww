@@ -4,13 +4,17 @@ import static christmas.view.InputView.readDate;
 import static christmas.view.InputView.readOrder;
 import static christmas.view.OutputView.printErrorMessage;
 import static christmas.view.OutputView.printMessage;
+import static christmas.view.OutputView.printOrder;
 import static christmas.view.constants.ViewConstants.WELCOME_MESSAGE;
 
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.exception.EventPlannerException;
+import christmas.service.OrderService;
 
 public class MainController {
+    OrderService orderService = new OrderService();
+
     public void run() {
         printMessage(WELCOME_MESSAGE);
 
@@ -18,6 +22,7 @@ public class MainController {
 
         Order order = generateOrder();
 
+        printOrder(order);
     }
 
     private Date generateDate() {
@@ -33,7 +38,7 @@ public class MainController {
     private Order generateOrder() {
         while (true) {
             try {
-                return Order.of(readOrder());
+                return orderService.createOrder(readOrder());
             } catch (EventPlannerException e) {
                 printErrorMessage(e);
             }
