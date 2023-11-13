@@ -1,7 +1,9 @@
 package christmas.domain;
 
+import static christmas.domain.constants.Category.BEVERAGE;
 import static christmas.exception.constants.ErrorMessage.INVALID_ORDER;
 
+import christmas.domain.constants.Category;
 import christmas.exception.EventPlannerException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +28,7 @@ public class Order {
         List<OrderItem> validFormatMenu = validateFormat(orderItems);
         validateDuplicateDish(validFormatMenu);
         validateOrderAmount(validFormatMenu);
+        validateOnlyBeverage(validFormatMenu);
         return validFormatMenu;
     }
 
@@ -64,5 +67,13 @@ public class Order {
             throw EventPlannerException.of(INVALID_ORDER);
         }
         this.orderCount = orderCount;
+    }
+
+    private void validateOnlyBeverage(List<OrderItem> validFormatMenu) {
+        boolean onlyBeverage = validFormatMenu.stream()
+                .allMatch(orderItem -> orderItem.getDish().getCategory().equals(BEVERAGE));
+        if (onlyBeverage) {
+            throw EventPlannerException.of(INVALID_ORDER);
+        }
     }
 }
