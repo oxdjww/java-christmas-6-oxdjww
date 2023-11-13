@@ -14,7 +14,7 @@ import static christmas.view.constants.ViewConstants.ORDER_MESSAGE;
 import static christmas.view.constants.ViewConstants.TOTAL_BENEFIT_AMOUNT_MESSAGE;
 import static christmas.view.constants.ViewConstants.TOTAL_ORDER_AMOUNT_MESSAGE;
 
-import christmas.discount.BenefitForm;
+import christmas.benefit.BenefitForm;
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.OrderItem;

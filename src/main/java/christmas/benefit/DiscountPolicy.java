@@ -1,4 +1,4 @@
-package christmas.discount;
+package christmas.benefit;
 
 public interface DiscountPolicy {
     int getDiscountAmount();

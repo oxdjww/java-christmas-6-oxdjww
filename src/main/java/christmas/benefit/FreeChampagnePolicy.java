@@ -1,4 +1,4 @@
-package christmas.discount;
+package christmas.benefit;
 
 import static christmas.domain.constants.Menu.샴페인;
 

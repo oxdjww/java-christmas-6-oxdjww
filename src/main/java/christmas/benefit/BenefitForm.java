@@ -1,4 +1,4 @@
-package christmas.discount;
+package christmas.benefit;
 
 import christmas.domain.Date;
 import christmas.domain.Order;
@@ -11,6 +11,7 @@ public class BenefitForm {
     private final FreeChampagnePolicy freeChampagnePolicy;
     private final int totalBenefitAmount;
 
+    // 이벤트가 적용되지 않을 경우 할인금액이 0으로 되어있는 기본 생성자들 호출
     public BenefitForm() {
         this.dDayDiscountPolicy = new DDayDiscountPolicy();
         this.weekdayDiscountPolicy = new WeekdayDiscountPolicy();

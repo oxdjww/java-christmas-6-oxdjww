@@ -3,7 +3,7 @@ package christmas.domain;
 import static christmas.domain.constants.Category.BEVERAGE;
 import static christmas.exception.constants.ErrorMessage.INVALID_ORDER;
 
-import christmas.discount.BenefitForm;
+import christmas.benefit.BenefitForm;
 import christmas.domain.constants.Category;
 import christmas.domain.dish.Dish;
 import christmas.exception.EventPlannerException;
