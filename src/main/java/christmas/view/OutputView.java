@@ -128,7 +128,8 @@ public class OutputView {
         return formattedDiscounts;
     }
 
-    private static void appendDiscount(final StringBuilder stringBuilder, final String label, final int discountAmount) {
+    private static void appendDiscount(final StringBuilder stringBuilder, final String label,
+                                       final int discountAmount) {
         if (discountAmount > 0) {
             stringBuilder.append(
                     String.format("%s: %s원\n", label, formatNumberWithComma(Math.negateExact(discountAmount))));

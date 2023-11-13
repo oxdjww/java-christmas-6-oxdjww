@@ -4,7 +4,7 @@ import static christmas.benefit.constants.BenefitConfig.SPECIAL_DISCOUNT_AMOUNT;
 
 import christmas.domain.Date;
 
-public class SpecialDiscountPolicy implements DiscountPolicy{
+public class SpecialDiscountPolicy implements DiscountPolicy {
     private Date date;
     private int specialDiscountAmount = 0;
 

@@ -6,7 +6,7 @@ import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.constants.DayOfWeek;
 
-public class WeekendDiscountPolicy implements DiscountPolicy{
+public class WeekendDiscountPolicy implements DiscountPolicy {
     private Date date;
     private int weekEndDiscountAmount;
 
@@ -20,6 +20,7 @@ public class WeekendDiscountPolicy implements DiscountPolicy{
             weekEndDiscountAmount = WEEKEND_DISCOUNT_UNIT.getValue() * order.getDessertCount();
         }
     }
+
     @Override
     public int getDiscountAmount() {
         return this.weekEndDiscountAmount;

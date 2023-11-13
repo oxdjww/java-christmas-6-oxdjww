@@ -30,8 +30,8 @@ public class BenefitForm {
 
     public BenefitForm(final Date date, final Order order) {
         this.dDayDiscountPolicy = new DDayDiscountPolicy(date);
-        this.weekdayDiscountPolicy = new WeekdayDiscountPolicy(date,order);
-        this.weekendDiscountPolicy = new WeekendDiscountPolicy(date,order);
+        this.weekdayDiscountPolicy = new WeekdayDiscountPolicy(date, order);
+        this.weekendDiscountPolicy = new WeekendDiscountPolicy(date, order);
         this.specialDiscountPolicy = new SpecialDiscountPolicy(date);
         this.freeChampagnePolicy = new FreeChampagnePolicy(order.getTotalOrderAmount());
         this.totalBenefitAmount =
@@ -43,7 +43,7 @@ public class BenefitForm {
     }
 
     public static BenefitForm of(final Date date, final Order order) {
-        if ( order.getTotalOrderAmount() < MINIMUM_EVENT_ORDER_AMOUNT.getValue()) {
+        if (order.getTotalOrderAmount() < MINIMUM_EVENT_ORDER_AMOUNT.getValue()) {
             return new BenefitForm();
         }
         return new BenefitForm(date, order);
