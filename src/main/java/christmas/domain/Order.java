@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 public class Order {
     public static final int MAXIMUM_ORDER_COUNT = 20;
     private final List<OrderItem> orderItems;
-    private int totalOrderAmount;
 
     private Order(final String orderItems) {
         this.orderItems = validate(orderItems);
