@@ -8,6 +8,7 @@ import static christmas.view.OutputView.printErrorMessage;
 import static christmas.view.OutputView.printGift;
 import static christmas.view.OutputView.printMessage;
 import static christmas.view.OutputView.printOrder;
+import static christmas.view.OutputView.printTotalBenefitAmount;
 import static christmas.view.OutputView.printTotalOrderAmount;
 import static christmas.view.constants.ViewConstants.WELCOME_MESSAGE;
 
@@ -36,6 +37,8 @@ public class MainController {
         printGift(order.getBenefitForm());
 
         printBenefitForm(order.getBenefitForm());
+
+        printTotalBenefitAmount(order.getBenefitForm());
     }
 
     private Date generateDate() {

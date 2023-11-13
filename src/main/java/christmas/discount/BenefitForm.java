@@ -8,6 +8,7 @@ public class BenefitForm {
     private final WeekendDiscountPolicy weekendDiscountPolicy;
     private final SpecialDiscountPolicy specialDiscountPolicy;
     private final FreeChampagnePolicy freeChampagnePolicy;
+    private final int totalBenefitAmount;
 
     public BenefitForm() {
         this.dDayDiscountPolicy = new DDayDiscountPolicy();
@@ -15,6 +16,7 @@ public class BenefitForm {
         this.weekendDiscountPolicy = new WeekendDiscountPolicy();
         this.specialDiscountPolicy = new SpecialDiscountPolicy();
         this.freeChampagnePolicy = new FreeChampagnePolicy();
+        this.totalBenefitAmount = 0;
     }
 
     public BenefitForm(final Date date, int totalOrderAmount) {
@@ -23,6 +25,12 @@ public class BenefitForm {
         this.weekendDiscountPolicy = new WeekendDiscountPolicy(date);
         this.specialDiscountPolicy = new SpecialDiscountPolicy(date);
         this.freeChampagnePolicy = new FreeChampagnePolicy(totalOrderAmount);
+        this.totalBenefitAmount =
+                dDayDiscountPolicy.getDiscountAmount()
+                        + weekdayDiscountPolicy.getDiscountAmount()
+                        + weekendDiscountPolicy.getDiscountAmount()
+                        + specialDiscountPolicy.getDiscountAmount()
+                        + freeChampagnePolicy.getDiscountAmount();
     }
 
     public static BenefitForm of(final Date date, final int totalOrderAmount) {
@@ -32,7 +40,7 @@ public class BenefitForm {
         return new BenefitForm(date, totalOrderAmount);
     }
 
-    public int getdDayDiscountAmount() {
+    public int getDDayDiscountAmount() {
         return this.dDayDiscountPolicy.getDiscountAmount();
     }
 
@@ -50,5 +58,9 @@ public class BenefitForm {
 
     public int getFreeChampagneDiscountAmount() {
         return this.freeChampagnePolicy.getDiscountAmount();
+    }
+
+    public int getTotalBenefitAmount() {
+        return this.totalBenefitAmount;
     }
 }

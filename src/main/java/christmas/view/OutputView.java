@@ -117,4 +117,9 @@ public class OutputView {
         printNewLine();
     }
 
+    public static void printTotalBenefitAmount(final BenefitForm benefitForm) {
+        System.out.println("<총 혜택 금액>");
+        System.out.println(String.format("%s원\n",formatNumberWithComma(Math.negateExact(benefitForm.getTotalBenefitAmount()))));
+        printNewLine();
+    }
 }
