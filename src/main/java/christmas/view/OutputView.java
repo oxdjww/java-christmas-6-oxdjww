@@ -80,7 +80,7 @@ public class OutputView {
         }
 
         if (benefitForm.getFreeChampagneDiscountAmount() == 0) {
-            System.out.println("없음");
+            printNothing();
         }
         printNewLine();
     }
@@ -93,7 +93,7 @@ public class OutputView {
                 benefitForm.getSpecialDiscountAmount() == 0 &&
                 benefitForm.getWeekendDiscountAmount() == 0 &&
                 benefitForm.getFreeChampagneDiscountAmount() == 0) {
-            System.out.println("없음");
+            printNothing();
             printNewLine();
             return;
         }
@@ -143,6 +143,10 @@ public class OutputView {
             System.out.println(별.name());
             return;
         }
+        printNothing();
+    }
+
+    private static void printNothing() {
         System.out.println("없음");
     }
 }
