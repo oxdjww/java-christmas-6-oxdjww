@@ -12,8 +12,8 @@ public class WeekendDiscountPolicy implements DiscountPolicy{
     }
 
     public WeekendDiscountPolicy(Date date) {
-        if (date.getDay().equals(DayOfWeek.SAT)
-                || date.getDay().equals(DayOfWeek.SUN)) {
+        if (date.getDay().equals(DayOfWeek.FRI)
+                || date.getDay().equals(DayOfWeek.SAT)) {
             weekEndDiscountAmount = 2023;
         }
     }

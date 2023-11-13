@@ -13,11 +13,11 @@ public class WeekdayDiscountPolicy implements DiscountPolicy {
 
     public WeekdayDiscountPolicy(Date date) {
         this.date = date;
-        if (date.getDay().equals(DayOfWeek.MON)
+        if (date.getDay().equals(DayOfWeek.SUN)
+                || date.getDay().equals(DayOfWeek.MON)
                 || date.getDay().equals(DayOfWeek.TUE)
                 || date.getDay().equals(DayOfWeek.WED)
                 || date.getDay().equals(DayOfWeek.THU)
-                || date.getDay().equals(DayOfWeek.FRI)
         ) {
             weekdayDiscountAmount = 2023;
         }
