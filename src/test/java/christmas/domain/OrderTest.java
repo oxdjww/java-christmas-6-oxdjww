@@ -37,7 +37,7 @@ class OrderTest {
 
     @Test
     @DisplayName("메뉴판에 없는 메뉴를 주문하면 예외가 발생한다.")
-    void createNotExistingMenu() {
+    void createOrderWithNotExistingMenu() {
         assertInvalidOrder("타파스-1,제로사이다-1");
     }
 
@@ -49,8 +49,12 @@ class OrderTest {
 
     @Test
     @DisplayName("주문 메뉴 수량이 최대치를 넘어가면 예외가 발생한다.")
-    void createMenuOverLimit() {
-        assertInvalidOrder("타파스-1,제로콜라-20");
+    void createOrderWithOverLimit() { assertInvalidOrder("타파스-1,제로콜라-20"); }
+
+    @Test
+    @DisplayName("음료만 주문시 예외가 발생한다.")
+    void createOrderWithOnlyBeverage() {
+        assertInvalidOrder("제로콜라-2");
     }
 
     @Test
