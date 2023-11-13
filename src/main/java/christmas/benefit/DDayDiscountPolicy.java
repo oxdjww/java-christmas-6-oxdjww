@@ -8,17 +8,13 @@ import christmas.domain.Date;
 
 public class DDayDiscountPolicy implements DiscountPolicy {
     private Date date;
-    private int dDayDiscountAmount;
+    private int dDayDiscountAmount = 0;
 
     public DDayDiscountPolicy() {
-        this.dDayDiscountAmount = 0;
     }
 
     public DDayDiscountPolicy(final Date date) {
-        if (date.getDate() > EVENT_DATE.getValue()) {
-            this.dDayDiscountAmount = 0;
-        }
-        if (date.getDate() >= START_OF_EVENT_MONTH.getValue() && date.getDate() <= EVENT_DATE.getValue()) {
+        if (date.isInRange(START_OF_EVENT_MONTH.getValue(), EVENT_DATE.getValue())) {
             this.dDayDiscountAmount = DDAY_DEFAULT_DISCOUNT_AMOUNT.getValue() + (date.getDate() - 1) * 100;
         }
     }

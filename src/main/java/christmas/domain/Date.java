@@ -60,6 +60,10 @@ public class Date {
         return specialDays.contains(date);
     }
 
+    public boolean isInRange(final int startDate, final int dueDate) {
+        return this.date >= startDate && this.date <= dueDate;
+    }
+
     public int getDate() {
         return this.date;
     }
