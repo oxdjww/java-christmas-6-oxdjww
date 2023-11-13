@@ -1,6 +1,6 @@
-package christmas.benefit;
+package christmas.benefit.discount;
 
-import static christmas.benefit.BenefitConfig.WEEKEND_DISCOUNT_UNIT;
+import static christmas.benefit.constants.BenefitConfig.WEEKEND_DISCOUNT_UNIT;
 
 import christmas.domain.Date;
 import christmas.domain.Order;

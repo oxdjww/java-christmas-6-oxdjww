@@ -1,4 +1,4 @@
-package christmas.benefit;
+package christmas.benefit.constants;
 
 public enum BenefitConfig {
     MINIMUM_EVENT_ORDER_AMOUNT(10000),

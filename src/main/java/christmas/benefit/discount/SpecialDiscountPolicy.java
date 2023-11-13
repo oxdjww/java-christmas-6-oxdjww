@@ -1,6 +1,6 @@
-package christmas.benefit;
+package christmas.benefit.discount;
 
-import static christmas.benefit.BenefitConfig.SPECIAL_DISCOUNT_AMOUNT;
+import static christmas.benefit.constants.BenefitConfig.SPECIAL_DISCOUNT_AMOUNT;
 
 import christmas.domain.Date;
 

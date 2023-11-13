@@ -1,8 +1,8 @@
-package christmas.benefit;
+package christmas.benefit.discount;
 
-import static christmas.benefit.BenefitConfig.DDAY_DEFAULT_DISCOUNT_AMOUNT;
-import static christmas.benefit.BenefitConfig.EVENT_DATE;
-import static christmas.benefit.BenefitConfig.START_OF_EVENT_MONTH;
+import static christmas.benefit.constants.BenefitConfig.DDAY_DEFAULT_DISCOUNT_AMOUNT;
+import static christmas.benefit.constants.BenefitConfig.EVENT_DATE;
+import static christmas.benefit.constants.BenefitConfig.START_OF_EVENT_MONTH;
 
 import christmas.domain.Date;
 

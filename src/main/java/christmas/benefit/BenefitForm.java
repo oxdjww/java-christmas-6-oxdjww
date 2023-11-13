@@ -1,7 +1,12 @@
 package christmas.benefit;
 
-import static christmas.benefit.BenefitConfig.MINIMUM_EVENT_ORDER_AMOUNT;
+import static christmas.benefit.constants.BenefitConfig.MINIMUM_EVENT_ORDER_AMOUNT;
 
+import christmas.benefit.discount.DDayDiscountPolicy;
+import christmas.benefit.discount.SpecialDiscountPolicy;
+import christmas.benefit.discount.WeekdayDiscountPolicy;
+import christmas.benefit.discount.WeekendDiscountPolicy;
+import christmas.benefit.promotion.FreeChampagnePolicy;
 import christmas.domain.Date;
 import christmas.domain.Order;
 
