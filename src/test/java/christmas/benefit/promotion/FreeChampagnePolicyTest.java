@@ -25,9 +25,9 @@ class FreeChampagnePolicyTest {
         FreeChampagnePolicy freeChampagnePolicy = new FreeChampagnePolicy(totalOrderAmount);
 
         // when
-        int discountAmount = freeChampagnePolicy.getDiscountAmount();
+        int actualDiscount = freeChampagnePolicy.getDiscountAmount();
 
         // then
-        assertEquals(expectedDiscount, discountAmount);
+        assertEquals(expectedDiscount, actualDiscount);
     }
 }
