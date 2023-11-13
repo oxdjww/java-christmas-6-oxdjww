@@ -2,6 +2,7 @@ package christmas.controller;
 
 import static christmas.view.InputView.readDate;
 import static christmas.view.InputView.readOrder;
+import static christmas.view.OutputView.printBadge;
 import static christmas.view.OutputView.printBenefitForm;
 import static christmas.view.OutputView.printBenefitNotice;
 import static christmas.view.OutputView.printErrorMessage;
@@ -41,6 +42,8 @@ public class MainController {
         printTotalBenefitAmount(order.getBenefitForm());
 
         printFinalPaymentAmount(order);
+
+        printBadge(order);
     }
 
     private Date generateDate() {

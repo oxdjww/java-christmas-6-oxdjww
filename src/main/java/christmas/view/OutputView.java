@@ -1,5 +1,8 @@
 package christmas.view;
 
+import static christmas.domain.constants.Badge.별;
+import static christmas.domain.constants.Badge.산타;
+import static christmas.domain.constants.Badge.트리;
 import static christmas.domain.constants.Menu.샴페인;
 
 import christmas.discount.BenefitForm;
@@ -114,18 +117,32 @@ public class OutputView {
         }
 
         System.out.println(formattedDiscounts);
-        printNewLine();
     }
 
     public static void printTotalBenefitAmount(final BenefitForm benefitForm) {
-        System.out.println("<총 혜택 금액>");
+        System.out.println("<총혜택 금액>");
         System.out.println(String.format("%s원\n",formatNumberWithComma(Math.negateExact(benefitForm.getTotalBenefitAmount()))));
-        printNewLine();
     }
 
     public static void printFinalPaymentAmount(final Order order) {
         System.out.println("<할인 후 예상 결제 금액>");
         System.out.println(String.format("%s원\n",formatNumberWithComma(order.getTotalOrderAmount() - order.getBenefitForm().getTotalDiscountAmount())));
-        printNewLine();
+    }
+
+    public static void printBadge(final Order order) {
+        System.out.println("<12월 이벤트 배지>");
+        if (order.getBenefitForm().getTotalBenefitAmount() > 산타.getBenefitAmout()) {
+            System.out.println(산타.name());
+            return;
+        }
+        if (order.getBenefitForm().getTotalBenefitAmount() > 트리.getBenefitAmout()) {
+            System.out.println(트리.name());
+            return;
+        }
+        if (order.getBenefitForm().getTotalBenefitAmount() > 별.getBenefitAmout()) {
+            System.out.println(별.name());
+            return;
+        }
+        System.out.println("없음");
     }
 }
