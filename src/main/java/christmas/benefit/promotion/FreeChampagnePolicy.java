@@ -12,7 +12,7 @@ public class FreeChampagnePolicy implements DiscountPolicy {
     }
 
     public FreeChampagnePolicy(final int totalOrderAmount) {
-        if (totalOrderAmount > MINIMUM_FREE_CHAMPAGNE_ORDER_AMOUNT.getValue()) {
+        if (totalOrderAmount >= MINIMUM_FREE_CHAMPAGNE_ORDER_AMOUNT.getValue()) {
             this.freeChampagneDiscountAmount = 샴페인.getPrice();
         }
     }
