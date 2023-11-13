@@ -153,14 +153,21 @@ public class OutputView {
             printNothing();
             return;
         }
-        printBadgeIfAmountIsHigher(order.getBenefitForm().getTotalBenefitAmount(), 산타);
-        printBadgeIfAmountIsHigher(order.getBenefitForm().getTotalBenefitAmount(), 트리);
-        printBadgeIfAmountIsHigher(order.getBenefitForm().getTotalBenefitAmount(), 별);
+        printBadgeIfAmountIsHigher(order.getBenefitForm().getTotalBenefitAmount());
     }
 
-    private static void printBadgeIfAmountIsHigher(final int totalBenefitAmount, final Badge badge) {
-        if (totalBenefitAmount > badge.getBenefitAmout()) {
-            System.out.println(badge.name());
+    private static void printBadgeIfAmountIsHigher(final int totalBenefitAmount) {
+        if (totalBenefitAmount > 산타.getBenefitAmout()) {
+            System.out.println(산타.name());
+            return;
+        }
+        if (totalBenefitAmount > 트리.getBenefitAmout()) {
+            System.out.println(트리.name());
+            return;
+        }
+        if (totalBenefitAmount > 별.getBenefitAmout()) {
+            System.out.println(별.name());
+            return;
         }
     }
 
