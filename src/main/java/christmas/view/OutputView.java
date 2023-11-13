@@ -81,34 +81,36 @@ public class OutputView {
     public static void printBenefitForm(final BenefitForm benefitForm) {
         System.out.println("<혜택 내역>");
 
-        if (benefitForm.getdDayDiscountAmount() == 0 &&
+        if (benefitForm.getDDayDiscountAmount() == 0 &&
                 benefitForm.getWeekDayDiscountAmount() == 0 &&
                 benefitForm.getSpecialDiscountAmount() == 0 &&
                 benefitForm.getWeekendDiscountAmount() == 0 &&
                 benefitForm.getFreeChampagneDiscountAmount() == 0) {
             System.out.println("없음");
+            printNewLine();
             return;
         }
 
         StringBuilder formattedDiscounts = new StringBuilder();
 
-        if (benefitForm.getdDayDiscountAmount() > 0) {
-            formattedDiscounts.append(String.format("크리스마스 디데이 할인: -%s원\n", formatNumberWithComma(benefitForm.getdDayDiscountAmount())));
+        if (benefitForm.getDDayDiscountAmount() > 0) {
+            formattedDiscounts.append(String.format("크리스마스 디데이 할인: %s원\n", formatNumberWithComma(Math.negateExact(benefitForm.getDDayDiscountAmount()))));
         }
         if (benefitForm.getWeekDayDiscountAmount() > 0) {
-            formattedDiscounts.append(String.format("평일 할인: -%s원\n", formatNumberWithComma(benefitForm.getWeekDayDiscountAmount())));
+            formattedDiscounts.append(String.format("평일 할인: %s원\n", formatNumberWithComma(Math.negateExact(benefitForm.getWeekDayDiscountAmount()))));
         }
         if (benefitForm.getSpecialDiscountAmount() > 0) {
-            formattedDiscounts.append(String.format("특별 할인: -%s원\n", formatNumberWithComma(benefitForm.getSpecialDiscountAmount())));
+            formattedDiscounts.append(String.format("특별 할인: %s원\n", formatNumberWithComma(Math.negateExact(benefitForm.getSpecialDiscountAmount()))));
         }
         if (benefitForm.getWeekendDiscountAmount() > 0) {
-            formattedDiscounts.append(String.format("주말 할인: -%s원\n", formatNumberWithComma(benefitForm.getWeekendDiscountAmount())));
+            formattedDiscounts.append(String.format("주말 할인: %s원\n", formatNumberWithComma(Math.negateExact(benefitForm.getWeekendDiscountAmount()))));
         }
         if (benefitForm.getFreeChampagneDiscountAmount() > 0) {
-            formattedDiscounts.append(String.format("증정 이벤트: -%s원\n", formatNumberWithComma(benefitForm.getFreeChampagneDiscountAmount())));
+            formattedDiscounts.append(String.format("증정 이벤트: %s원\n", formatNumberWithComma(Math.negateExact(benefitForm.getFreeChampagneDiscountAmount()))));
         }
 
         System.out.println(formattedDiscounts);
         printNewLine();
     }
+
 }
