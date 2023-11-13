@@ -14,7 +14,7 @@ public class DDayDiscountPolicy implements DiscountPolicy {
         this.dDayDiscountAmount = 0;
     }
 
-    public DDayDiscountPolicy(Date date) {
+    public DDayDiscountPolicy(final Date date) {
         if (date.getDate() > EVENT_DATE.getValue()) {
             this.dDayDiscountAmount = 0;
         }

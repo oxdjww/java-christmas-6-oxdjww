@@ -57,7 +57,7 @@ public class OutputView {
         printNewLine();
     }
 
-    public static String formatNumberWithComma(int number) {
+    public static String formatNumberWithComma(final int number) {
         String numberStr = String.valueOf(number);
         int length = numberStr.length();
 
@@ -108,7 +108,7 @@ public class OutputView {
         System.out.println(formattedDiscounts);
     }
 
-    private static boolean meetBenefitCondition(BenefitForm benefitForm) {
+    private static boolean meetBenefitCondition(final BenefitForm benefitForm) {
         return benefitForm.getDDayDiscountAmount() == 0 &&
                 benefitForm.getWeekDayDiscountAmount() == 0 &&
                 benefitForm.getSpecialDiscountAmount() == 0 &&
@@ -116,7 +116,7 @@ public class OutputView {
                 benefitForm.getFreeChampagneDiscountAmount() == 0;
     }
 
-    private static StringBuilder generateBenefitForm(BenefitForm benefitForm) {
+    private static StringBuilder generateBenefitForm(final BenefitForm benefitForm) {
         StringBuilder formattedDiscounts = new StringBuilder();
 
         appendDiscount(formattedDiscounts, "크리스마스 디데이 할인", benefitForm.getDDayDiscountAmount());
@@ -128,7 +128,7 @@ public class OutputView {
         return formattedDiscounts;
     }
 
-    private static void appendDiscount(StringBuilder stringBuilder, String label, int discountAmount) {
+    private static void appendDiscount(final StringBuilder stringBuilder, final String label, final int discountAmount) {
         if (discountAmount > 0) {
             stringBuilder.append(
                     String.format("%s: %s원\n", label, formatNumberWithComma(Math.negateExact(discountAmount))));

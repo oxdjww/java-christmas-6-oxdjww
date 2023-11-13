@@ -12,7 +12,7 @@ public enum BenefitConfig {
 
     private final int value;
 
-    BenefitConfig(int value) {
+    BenefitConfig(final int value) {
         this.value = value;
     }
 

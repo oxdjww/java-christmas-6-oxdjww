@@ -32,14 +32,14 @@ public class OrderItem {
         return new OrderItem(order);
     }
 
-    private static void validateFormat(String[] orderItemPair) {
+    private static void validateFormat(final String[] orderItemPair) {
         // "-"가 한개인지. 즉, 유효한 형식인지 검증
         if (orderItemPair.length != 2) {
             throw EventPlannerException.of(INVALID_ORDER);
         }
     }
 
-    private static void validateCount(String orderItemCount) {
+    private static void validateCount(final String orderItemCount) {
         // 주문 개수가 1개 이상인지 검증
         try {
             if (Integer.parseInt(orderItemCount) <= 0) {

@@ -14,7 +14,7 @@ public class WeekdayDiscountPolicy implements DiscountPolicy {
         this.weekdayDiscountAmount = 0;
     }
 
-    public WeekdayDiscountPolicy(Date date, Order order) {
+    public WeekdayDiscountPolicy(final Date date, final Order order) {
         this.date = date;
         if (date.getDay().equals(DayOfWeek.SUN)
                 || date.getDay().equals(DayOfWeek.MON)

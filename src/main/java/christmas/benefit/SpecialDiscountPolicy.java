@@ -12,7 +12,7 @@ public class SpecialDiscountPolicy implements DiscountPolicy{
 
     }
 
-    public SpecialDiscountPolicy(Date date) {
+    public SpecialDiscountPolicy(final Date date) {
         if (date.isSpecialDay()) {
             specialDiscountAmount = SPECIAL_DISCOUNT_AMOUNT.getValue();
         }

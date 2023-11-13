@@ -14,7 +14,7 @@ public class WeekendDiscountPolicy implements DiscountPolicy{
         this.weekEndDiscountAmount = 0;
     }
 
-    public WeekendDiscountPolicy(Date date, Order order) {
+    public WeekendDiscountPolicy(final Date date, final Order order) {
         if (date.getDay().equals(DayOfWeek.FRI)
                 || date.getDay().equals(DayOfWeek.SAT)) {
             weekEndDiscountAmount = WEEKEND_DISCOUNT_UNIT.getValue() * order.getDessertCount();
