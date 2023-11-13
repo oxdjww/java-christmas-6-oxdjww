@@ -38,10 +38,18 @@ public class MainController {
 
         printBenefitNotice(date);
 
+        printOrderInfo(order);
+
+        printBenefitInfo(order);
+    }
+
+    private static void printOrderInfo(Order order) {
         printOrder(order);
 
         printTotalOrderAmount(order);
+    }
 
+    private static void printBenefitInfo(Order order) {
         printGift(order.getBenefitForm());
 
         printBenefitForm(order.getBenefitForm());
