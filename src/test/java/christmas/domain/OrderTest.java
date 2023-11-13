@@ -49,7 +49,9 @@ class OrderTest {
 
     @Test
     @DisplayName("주문 메뉴 수량이 최대치를 넘어가면 예외가 발생한다.")
-    void createOrderWithOverLimit() { assertInvalidOrder("타파스-1,제로콜라-20"); }
+    void createOrderWithOverLimit() {
+        assertInvalidOrder("타파스-1,제로콜라-20");
+    }
 
     @Test
     @DisplayName("음료만 주문시 예외가 발생한다.")
@@ -65,8 +67,8 @@ class OrderTest {
         Order order2 = Order.from("티본스테이크-5,샴페인-2", Date.of("3"));
 
         // when & then
-        Assertions.assertEquals(3,order1.getMaindishCount());
-        Assertions.assertEquals(5,order2.getMaindishCount());
+        Assertions.assertEquals(3, order1.getMaindishCount());
+        Assertions.assertEquals(5, order2.getMaindishCount());
     }
 
     @Test
@@ -77,8 +79,8 @@ class OrderTest {
         Order order2 = Order.from("티본스테이크-2,샴페인-2,해산물파스타-1,초코케이크-5", Date.of("3"));
 
         // when & then
-        Assertions.assertEquals(0,order1.getDessertCount());
-        Assertions.assertEquals(5,order2.getDessertCount());
+        Assertions.assertEquals(0, order1.getDessertCount());
+        Assertions.assertEquals(5, order2.getDessertCount());
     }
 
     private void assertInvalidOrder(String orderString) {
