@@ -2,6 +2,7 @@ package christmas.domain;
 
 import static christmas.exception.constants.ErrorMessage.INVALID_ORDER;
 
+import christmas.domain.constants.Category;
 import christmas.domain.dish.Dish;
 import christmas.domain.dish.DishGenerator;
 import christmas.exception.EventPlannerException;
@@ -57,5 +58,9 @@ public class OrderItem {
 
     public int getCount() {
         return count;
+    }
+
+    public Category getDishCategory() {
+        return this.dish.getCategory();
     }
 }

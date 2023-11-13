@@ -96,14 +96,14 @@ public class Order {
 
     public int getMaindishCount() {
         return orderItems.stream()
-                .filter(orderItem -> orderItem.getDish().getCategory() == MAINDISH)
+                .filter(orderItem -> orderItem.getDishCategory() == MAINDISH)
                 .mapToInt(OrderItem::getCount)
                 .sum();
     }
 
     public int getDessertCount() {
         return orderItems.stream()
-                .filter(orderItem -> orderItem.getDish().getCategory() == DESSERT)
+                .filter(orderItem -> orderItem.getDishCategory() == DESSERT)
                 .mapToInt(OrderItem::getCount)
                 .sum();
     }
