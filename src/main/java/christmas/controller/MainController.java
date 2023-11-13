@@ -21,8 +21,13 @@ import christmas.service.DateService;
 import christmas.service.OrderService;
 
 public class MainController {
-    OrderService orderService = new OrderService();
-    DateService dateService = new DateService();
+    private final OrderService orderService;
+    private final DateService dateService;
+
+    public MainController(OrderService orderService, DateService dateService) {
+        this.orderService = orderService;
+        this.dateService = dateService;
+    }
 
     public void run() {
         printMessage(WELCOME_MESSAGE);
