@@ -3,6 +3,7 @@ package christmas.domain;
 import static christmas.domain.constants.Category.BEVERAGE;
 import static christmas.exception.constants.ErrorMessage.INVALID_ORDER;
 
+import christmas.discount.BenefitForm;
 import christmas.exception.EventPlannerException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,13 +15,15 @@ import java.util.stream.Collectors;
 public class Order {
     public static final int MAXIMUM_ORDER_COUNT = 20;
     private final List<OrderItem> orderItems;
+    private final BenefitForm benefitForm;
 
-    private Order(final String orderItems) {
+    private Order(final String orderItems, final Date date) {
         this.orderItems = validate(orderItems);
+        this.benefitForm = BenefitForm.of(date, getTotalOrderAmount());
     }
 
-    public static Order of(final String orderItems) {
-        return new Order(orderItems);
+    public static Order from(final String orderItems, final Date date) {
+        return new Order(orderItems, date);
     }
 
     private List<OrderItem> validate(String orderItems) {
@@ -83,5 +86,9 @@ public class Order {
                 .mapToDouble(orderItem ->
                         orderItem.getDish().getPrice() * orderItem.getCount())
                 .sum();
+    }
+
+    public BenefitForm getBenefitForm() {
+        return this.benefitForm;
     }
 }

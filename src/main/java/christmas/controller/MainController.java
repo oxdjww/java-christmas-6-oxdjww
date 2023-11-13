@@ -2,7 +2,10 @@ package christmas.controller;
 
 import static christmas.view.InputView.readDate;
 import static christmas.view.InputView.readOrder;
+import static christmas.view.OutputView.printBenefitNotice;
+import static christmas.view.OutputView.printBenefitForm;
 import static christmas.view.OutputView.printErrorMessage;
+import static christmas.view.OutputView.printGift;
 import static christmas.view.OutputView.printMessage;
 import static christmas.view.OutputView.printOrder;
 import static christmas.view.OutputView.printTotalOrderAmount;
@@ -12,6 +15,7 @@ import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.exception.EventPlannerException;
 import christmas.service.OrderService;
+import christmas.view.OutputView;
 
 public class MainController {
     OrderService orderService = new OrderService();
@@ -21,11 +25,15 @@ public class MainController {
 
         Date date = generateDate();
 
-        Order order = generateOrder();
+        Order order = generateOrder(date);
+
+        printBenefitNotice(date);
 
         printOrder(order);
 
         printTotalOrderAmount(order);
+
+        printGift(order.getBenefitForm());
     }
 
     private Date generateDate() {
@@ -38,10 +46,10 @@ public class MainController {
         }
     }
 
-    private Order generateOrder() {
+    private Order generateOrder(final Date date) {
         while (true) {
             try {
-                return orderService.createOrder(readOrder());
+                return orderService.createOrder(readOrder(), date);
             } catch (EventPlannerException e) {
                 printErrorMessage(e);
             }
