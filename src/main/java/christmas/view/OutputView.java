@@ -75,6 +75,10 @@ public class OutputView {
         if (benefitForm.getFreeChampagneDiscountAmount() == 샴페인.getPrice()) {
             System.out.println(샴페인.name() + " 1개");
         }
+
+        if (benefitForm.getFreeChampagneDiscountAmount() == 0) {
+            System.out.println("없음");
+        }
         printNewLine();
     }
 
