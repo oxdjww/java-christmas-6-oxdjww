@@ -4,6 +4,15 @@ import static christmas.domain.constants.Badge.별;
 import static christmas.domain.constants.Badge.산타;
 import static christmas.domain.constants.Badge.트리;
 import static christmas.domain.constants.Menu.샴페인;
+import static christmas.view.constants.ViewConstants.BADGE_NOTICE_MESSAGE;
+import static christmas.view.constants.ViewConstants.BENEFIT_FORM_MESSAGE;
+import static christmas.view.constants.ViewConstants.BENEFIT_NOTICE_MESSAGE;
+import static christmas.view.constants.ViewConstants.FINAL_PAYMENT_AMOUNT_MESSAGE;
+import static christmas.view.constants.ViewConstants.GIFT_NOTICE_MESSAGE;
+import static christmas.view.constants.ViewConstants.NOTHING_MESSAGE;
+import static christmas.view.constants.ViewConstants.ORDER_MESSAGE;
+import static christmas.view.constants.ViewConstants.TOTAL_BENEFIT_AMOUNT_MESSAGE;
+import static christmas.view.constants.ViewConstants.TOTAL_ORDER_AMOUNT_MESSAGE;
 
 import christmas.discount.BenefitForm;
 import christmas.domain.Date;
@@ -26,7 +35,7 @@ public class OutputView {
     }
 
     public static void printOrder(final Order order) {
-        System.out.println("<주문 메뉴>");
+        printMessage(ORDER_MESSAGE);
 
         List<OrderItem> orderItems = order.getOrderItems();
 
@@ -41,7 +50,8 @@ public class OutputView {
     }
 
     public static void printTotalOrderAmount(final Order order) {
-        System.out.println("<할인 전 총주문 금액>");
+        printMessage(TOTAL_ORDER_AMOUNT_MESSAGE);
+
         System.out.println(formatNumberWithComma(order.getTotalOrderAmount()) + "원");
         printNewLine();
     }
@@ -66,14 +76,14 @@ public class OutputView {
 
     public static void printBenefitNotice(final Date date) {
         System.out.printf(
-                "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!%n",
+                BENEFIT_NOTICE_MESSAGE.getMessage(),
                 date.getDate()
         );
         printNewLine();
     }
 
     public static void printGift(final BenefitForm benefitForm) {
-        System.out.println("<증정 메뉴>");
+        printMessage(GIFT_NOTICE_MESSAGE);
 
         if (benefitForm.getFreeChampagneDiscountAmount() == 샴페인.getPrice()) {
             System.out.println(샴페인.name() + " 1개");
@@ -86,13 +96,9 @@ public class OutputView {
     }
 
     public static void printBenefitForm(final BenefitForm benefitForm) {
-        System.out.println("<혜택 내역>");
+        printMessage(BENEFIT_FORM_MESSAGE);
 
-        if (benefitForm.getDDayDiscountAmount() == 0 &&
-                benefitForm.getWeekDayDiscountAmount() == 0 &&
-                benefitForm.getSpecialDiscountAmount() == 0 &&
-                benefitForm.getWeekendDiscountAmount() == 0 &&
-                benefitForm.getFreeChampagneDiscountAmount() == 0) {
+        if (meetBenefitCondition(benefitForm)) {
             printNothing();
             printNewLine();
             return;
@@ -119,18 +125,26 @@ public class OutputView {
         System.out.println(formattedDiscounts);
     }
 
+    private static boolean meetBenefitCondition(BenefitForm benefitForm) {
+        return benefitForm.getDDayDiscountAmount() == 0 &&
+                benefitForm.getWeekDayDiscountAmount() == 0 &&
+                benefitForm.getSpecialDiscountAmount() == 0 &&
+                benefitForm.getWeekendDiscountAmount() == 0 &&
+                benefitForm.getFreeChampagneDiscountAmount() == 0;
+    }
+
     public static void printTotalBenefitAmount(final BenefitForm benefitForm) {
-        System.out.println("<총혜택 금액>");
+        printMessage(TOTAL_BENEFIT_AMOUNT_MESSAGE);
         System.out.println(String.format("%s원\n",formatNumberWithComma(Math.negateExact(benefitForm.getTotalBenefitAmount()))));
     }
 
     public static void printFinalPaymentAmount(final Order order) {
-        System.out.println("<할인 후 예상 결제 금액>");
+        printMessage(FINAL_PAYMENT_AMOUNT_MESSAGE);
         System.out.println(String.format("%s원\n",formatNumberWithComma(order.getTotalOrderAmount() - order.getBenefitForm().getTotalDiscountAmount())));
     }
 
     public static void printBadge(final Order order) {
-        System.out.println("<12월 이벤트 배지>");
+        printMessage(BADGE_NOTICE_MESSAGE);
         if (order.getBenefitForm().getTotalBenefitAmount() > 산타.getBenefitAmout()) {
             System.out.println(산타.name());
             return;
@@ -147,6 +161,6 @@ public class OutputView {
     }
 
     private static void printNothing() {
-        System.out.println("없음");
+        printMessage(NOTHING_MESSAGE);
     }
 }
