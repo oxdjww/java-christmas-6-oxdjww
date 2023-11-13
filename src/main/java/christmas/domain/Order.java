@@ -1,11 +1,11 @@
 package christmas.domain;
 
 import static christmas.domain.constants.Category.BEVERAGE;
+import static christmas.domain.constants.Category.DESSERT;
+import static christmas.domain.constants.Category.MAINDISH;
 import static christmas.exception.constants.ErrorMessage.INVALID_ORDER;
 
 import christmas.benefit.BenefitForm;
-import christmas.domain.constants.Category;
-import christmas.domain.dish.Dish;
 import christmas.exception.EventPlannerException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,18 +95,16 @@ public class Order {
     }
 
     public int getMaindishCount() {
-        return (int) orderItems.stream()
-                .map(OrderItem::getDish)
-                .map(Dish::getCategory)
-                .filter(Category.MAINDISH::equals)
-                .count();
+        return orderItems.stream()
+                .filter(orderItem -> orderItem.getDish().getCategory() == MAINDISH)
+                .mapToInt(OrderItem::getCount)
+                .sum();
     }
 
     public int getDessertCount() {
-        return (int) orderItems.stream()
-                .map(OrderItem::getDish)
-                .map(Dish::getCategory)
-                .filter(Category.DESSERT::equals)
-                .count();
+        return orderItems.stream()
+                .filter(orderItem -> orderItem.getDish().getCategory() == DESSERT)
+                .mapToInt(OrderItem::getCount)
+                .sum();
     }
 }
