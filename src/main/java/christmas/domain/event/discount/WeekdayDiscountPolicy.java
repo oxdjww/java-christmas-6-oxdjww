@@ -12,11 +12,11 @@ public class WeekdayDiscountPolicy implements DiscountPolicy {
     public WeekdayDiscountPolicy(final Order order, final boolean eventEnabled) {
         if (eventEnabled) {
             Date date = order.getOrderDate();
-            if (date.getWeekDay(DayOfWeek.SUN)
-                    || date.getWeekDay(DayOfWeek.MON)
-                    || date.getWeekDay(DayOfWeek.TUE)
-                    || date.getWeekDay(DayOfWeek.WED)
-                    || date.getWeekDay(DayOfWeek.THU)
+            if (date.is(DayOfWeek.SUN)
+                    || date.is(DayOfWeek.MON)
+                    || date.is(DayOfWeek.TUE)
+                    || date.is(DayOfWeek.WED)
+                    || date.is(DayOfWeek.THU)
             ) {
                 weekdayDiscountAmount = EventConfig.WEEKDAY_DISCOUNT_UNIT.getValue() * order.getMaindishCount();
             }
