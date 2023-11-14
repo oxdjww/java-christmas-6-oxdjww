@@ -1,15 +1,16 @@
 package christmas.benefit.discount;
 
-import static christmas.benefit.constants.BenefitConfig.WEEKDAY_DISCOUNT_UNIT;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.constants.DayOfWeek;
+import christmas.domain.event.constants.EventConfig;
+import christmas.domain.event.discount.WeekdayDiscountPolicy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class WeekdayDiscountPolicyTest {
 
@@ -18,14 +19,14 @@ class WeekdayDiscountPolicyTest {
     void calculateWeekdayDiscountAmountOnWeekday() {
         // given
         Date mockDate = createMockDate(DayOfWeek.MON, true);
-        Order mockOrder = createMockOrder(3);
+        Order mockOrder = createMockOrder(3,"13");
 
         // when
-        WeekdayDiscountPolicy weekdayDiscountPolicy = new WeekdayDiscountPolicy(mockDate, mockOrder);
+        WeekdayDiscountPolicy weekdayDiscountPolicy = new WeekdayDiscountPolicy(mockOrder, true);
         int actualDiscount = weekdayDiscountPolicy.getDiscountAmount();
 
         // then
-        assertEquals(WEEKDAY_DISCOUNT_UNIT.getValue() * 3, actualDiscount);
+        assertEquals(EventConfig.WEEKDAY_DISCOUNT_UNIT.getValue() * 3, actualDiscount);
     }
 
     @Test
@@ -33,10 +34,10 @@ class WeekdayDiscountPolicyTest {
     void calculateWeekdayDiscountAmountOnWeekend() {
         // given
         Date mockDate = createMockDate(DayOfWeek.FRI, true);
-        Order mockOrder = createMockOrder(2);
+        Order mockOrder = createMockOrder(2,"1");
 
         // when
-        WeekdayDiscountPolicy weekdayDiscountPolicy = new WeekdayDiscountPolicy(mockDate, mockOrder);
+        WeekdayDiscountPolicy weekdayDiscountPolicy = new WeekdayDiscountPolicy(mockOrder, true);
         int actualDiscount = weekdayDiscountPolicy.getDiscountAmount();
 
         // then
@@ -45,14 +46,14 @@ class WeekdayDiscountPolicyTest {
 
     private Date createMockDate(DayOfWeek dayOfWeek, boolean isWeekendOrWeekDay) {
         Date mockDate = mock(Date.class);
-        when(mockDate.getWeekDay(dayOfWeek)).thenReturn(isWeekendOrWeekDay);
+        when(mockDate.is(dayOfWeek)).thenReturn(isWeekendOrWeekDay);
         return mockDate;
     }
 
-    private Order createMockOrder(int mainDishCount) {
+    private Order createMockOrder(int mainDishCount, String orderDate) {
         Order mockOrder = mock(Order.class);
         when(mockOrder.getMaindishCount()).thenReturn(mainDishCount);
+        when(mockOrder.getOrderDate()).thenReturn(Date.of(orderDate));
         return mockOrder;
     }
 }
-

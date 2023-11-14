@@ -1,11 +1,13 @@
 package christmas.benefit.discount;
 
-import static christmas.benefit.constants.BenefitConfig.DDAY_DEFAULT_DISCOUNT_AMOUNT;
+import static christmas.domain.event.constants.EventConfig.DDAY_DEFAULT_DISCOUNT_AMOUNT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import christmas.domain.Date;
+import christmas.domain.Order;
+import christmas.domain.event.discount.DDayDiscountPolicy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,10 +15,12 @@ import org.junit.jupiter.api.Test;
 class DDayDiscountPolicyTest {
 
     private Date mockDate;
+    private Order mockOrder;
 
     @BeforeEach
     void setUp() {
         mockDate = mock(Date.class);
+        mockOrder = mock(Order.class);
     }
 
     @Test
@@ -24,9 +28,10 @@ class DDayDiscountPolicyTest {
     void calculateDDayDiscountAmountWithinEventMonth() {
         // given
         givenDateInRange(true, 5);
+        when(mockOrder.getOrderDate()).thenReturn(mockDate);
 
         // when
-        DDayDiscountPolicy dDayDiscountPolicy = new DDayDiscountPolicy(mockDate);
+        DDayDiscountPolicy dDayDiscountPolicy = new DDayDiscountPolicy(mockOrder, true);
         int actualDiscount = dDayDiscountPolicy.getDiscountAmount();
 
         // then
@@ -38,9 +43,10 @@ class DDayDiscountPolicyTest {
     void calculateDDayDiscountAmountOutsideEventMonth() {
         // given
         givenDateInRange(false, 0);
+        when(mockOrder.getOrderDate()).thenReturn(mockDate);
 
         // when
-        DDayDiscountPolicy dDayDiscountPolicy = new DDayDiscountPolicy(mockDate);
+        DDayDiscountPolicy dDayDiscountPolicy = new DDayDiscountPolicy(mockOrder, true);
         int actualDiscount = dDayDiscountPolicy.getDiscountAmount();
 
         // then
