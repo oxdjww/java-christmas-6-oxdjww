@@ -5,7 +5,6 @@ import christmas.domain.event.constants.EventConfig;
 
 public class DDayDiscountPolicy implements DiscountPolicy {
     private int dDayDiscountAmount = 0;
-    private boolean eventEnabled;
 
     public DDayDiscountPolicy(final Order order, final boolean eventEnabled) {
         if (eventEnabled) {
@@ -15,7 +14,6 @@ public class DDayDiscountPolicy implements DiscountPolicy {
                         + (order.getOrderDate().getDate() - 1) * 100;
             }
         }
-        this.eventEnabled = eventEnabled;
     }
 
     @Override

@@ -7,7 +7,6 @@ import christmas.domain.event.constants.EventConfig;
 
 public class WeekendDiscountPolicy implements DiscountPolicy {
     private int weekEndDiscountAmount = 0;
-    private boolean eventEnabled;
 
     public WeekendDiscountPolicy(final Order order, final boolean eventEnabled) {
         if (eventEnabled) {
@@ -17,7 +16,6 @@ public class WeekendDiscountPolicy implements DiscountPolicy {
                 weekEndDiscountAmount = EventConfig.WEEKEND_DISCOUNT_UNIT.getValue() * order.getDessertCount();
             }
         }
-        this.eventEnabled = eventEnabled;
     }
 
     @Override
