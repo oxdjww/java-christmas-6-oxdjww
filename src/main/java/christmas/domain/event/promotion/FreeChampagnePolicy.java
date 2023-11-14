@@ -2,8 +2,8 @@ package christmas.domain.event.promotion;
 
 import static christmas.domain.constants.Menu.샴페인;
 
-import christmas.domain.event.discount.DiscountPolicy;
 import christmas.domain.event.constants.EventConfig;
+import christmas.domain.event.discount.DiscountPolicy;
 
 public class FreeChampagnePolicy implements DiscountPolicy {
     private int freeChampagneDiscountAmount = 0;

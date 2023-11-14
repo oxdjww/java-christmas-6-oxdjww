@@ -21,7 +21,6 @@ import christmas.exception.EventPlannerException;
 import christmas.service.DateService;
 import christmas.service.EventService;
 import christmas.service.OrderService;
-import christmas.view.OutputView;
 
 public class MainController {
     private final OrderService orderService;
@@ -66,7 +65,7 @@ public class MainController {
 
         printTotalBenefitAmount(eventService.getTotalBenefitAmount());
 
-        printFinalPaymentAmount(order.getTotalOrderAmount() ,eventService.getTotalDiscountAmount());
+        printFinalPaymentAmount(order.getTotalOrderAmount(), eventService.getTotalDiscountAmount());
 
         printBadge(eventService.getTotalBenefitAmount());
     }

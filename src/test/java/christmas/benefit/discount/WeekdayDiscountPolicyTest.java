@@ -19,7 +19,7 @@ class WeekdayDiscountPolicyTest {
     void calculateWeekdayDiscountAmountOnWeekday() {
         // given
         Date mockDate = createMockDate(DayOfWeek.MON, true);
-        Order mockOrder = createMockOrder(3,"13");
+        Order mockOrder = createMockOrder(3, "13");
 
         // when
         WeekdayDiscountPolicy weekdayDiscountPolicy = new WeekdayDiscountPolicy(mockOrder, true);
@@ -34,7 +34,7 @@ class WeekdayDiscountPolicyTest {
     void calculateWeekdayDiscountAmountOnWeekend() {
         // given
         Date mockDate = createMockDate(DayOfWeek.FRI, true);
-        Order mockOrder = createMockOrder(2,"1");
+        Order mockOrder = createMockOrder(2, "1");
 
         // when
         WeekdayDiscountPolicy weekdayDiscountPolicy = new WeekdayDiscountPolicy(mockOrder, true);

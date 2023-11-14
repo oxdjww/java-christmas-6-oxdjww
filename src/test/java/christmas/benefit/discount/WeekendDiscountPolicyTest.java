@@ -19,7 +19,7 @@ class WeekendDiscountPolicyTest {
     void calculateWeekendDiscountAmountOnWeekend() {
         // given
         Date mockDate = createMockDate(DayOfWeek.SAT, true);
-        Order mockOrder = createMockOrder(2,"8");
+        Order mockOrder = createMockOrder(2, "8");
 
         // when
         WeekendDiscountPolicy weekendDiscountPolicy = new WeekendDiscountPolicy(mockOrder, true);

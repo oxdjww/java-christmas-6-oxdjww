@@ -9,8 +9,10 @@ public class DDayDiscountPolicy implements DiscountPolicy {
 
     public DDayDiscountPolicy(final Order order, final boolean eventEnabled) {
         if (eventEnabled) {
-            if (order.getOrderDate().isInRange(EventConfig.START_OF_EVENT_MONTH.getValue(), EventConfig.EVENT_DATE.getValue())) {
-                this.dDayDiscountAmount = EventConfig.DDAY_DEFAULT_DISCOUNT_AMOUNT.getValue() + (order.getOrderDate().getDate() - 1) * 100;
+            if (order.getOrderDate()
+                    .isInRange(EventConfig.START_OF_EVENT_MONTH.getValue(), EventConfig.EVENT_DATE.getValue())) {
+                this.dDayDiscountAmount = EventConfig.DDAY_DEFAULT_DISCOUNT_AMOUNT.getValue()
+                        + (order.getOrderDate().getDate() - 1) * 100;
             }
         }
         this.eventEnabled = eventEnabled;
