@@ -42,16 +42,16 @@ public class MainController {
 
         eventService.setEvent(order);
 
-        printGift(eventService.getFreeChampagneDiscountAmount());
-
         printBenefitNotice(date);
 
         printOrderInfo(order);
 
+        printGift(eventService.getFreeChampagneDiscountAmount());
+
         printBenefitInfo(order);
     }
 
-    private static void printOrderInfo(Order order) {
+    private void printOrderInfo(Order order) {
         printOrder(order);
 
         printTotalOrderAmount(order);
