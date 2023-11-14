@@ -16,17 +16,22 @@ import static christmas.view.constants.ViewConstants.WELCOME_MESSAGE;
 
 import christmas.domain.Date;
 import christmas.domain.Order;
+import christmas.domain.event.dto.BenefitDTO;
 import christmas.exception.EventPlannerException;
 import christmas.service.DateService;
+import christmas.service.EventService;
 import christmas.service.OrderService;
+import christmas.view.OutputView;
 
 public class MainController {
     private final OrderService orderService;
     private final DateService dateService;
+    private final EventService eventService;
 
-    public MainController(OrderService orderService, DateService dateService) {
+    public MainController(OrderService orderService, DateService dateService, EventService eventService) {
         this.orderService = orderService;
         this.dateService = dateService;
+        this.eventService = eventService;
     }
 
     public void run() {
@@ -35,6 +40,10 @@ public class MainController {
         Date date = generateDate();
 
         Order order = generateOrder(date);
+
+        eventService.setEvent(order);
+
+        printGift(eventService.getFreeChampagneDiscountAmount());
 
         printBenefitNotice(date);
 
@@ -49,16 +58,17 @@ public class MainController {
         printTotalOrderAmount(order);
     }
 
-    private static void printBenefitInfo(Order order) {
-        printGift(order.getBenefitForm());
+    private void printBenefitInfo(Order order) {
+        printBenefitForm(eventService.getTotalBenefitAmount(), new BenefitDTO(
+                eventService.getDDayDiscountAmount(), eventService.getSpecialDiscountAmount(),
+                eventService.getWeekDayDiscountAmount(), eventService.getWeekendDiscountAmount(),
+                eventService.getFreeChampagneDiscountAmount()));
 
-        printBenefitForm(order.getBenefitForm());
+        printTotalBenefitAmount(eventService.getTotalBenefitAmount());
 
-        printTotalBenefitAmount(order.getBenefitForm());
+        printFinalPaymentAmount(order.getTotalOrderAmount() ,eventService.getTotalDiscountAmount());
 
-        printFinalPaymentAmount(order);
-
-        printBadge(order);
+        printBadge(eventService.getTotalBenefitAmount());
     }
 
     private Date generateDate() {

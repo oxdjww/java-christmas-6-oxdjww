@@ -1,4 +1,4 @@
-package christmas.benefit.discount;
+package christmas.domain.event.discount;
 
 public interface DiscountPolicy {
     int getDiscountAmount();

@@ -5,7 +5,6 @@ import static christmas.domain.constants.Category.DESSERT;
 import static christmas.domain.constants.Category.MAINDISH;
 import static christmas.exception.constants.ErrorMessage.INVALID_ORDER;
 
-import christmas.benefit.BenefitForm;
 import christmas.exception.EventPlannerException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,11 +16,11 @@ import java.util.stream.Collectors;
 public class Order {
     public static final int MAXIMUM_ORDER_COUNT = 20;
     private final List<OrderItem> orderItems;
-    private final BenefitForm benefitForm;
+    private final Date orderDate;
 
     private Order(final String orderItems, final Date date) {
         this.orderItems = validate(orderItems);
-        this.benefitForm = BenefitForm.of(date, this);
+        this.orderDate = date;
     }
 
     public static Order from(final String orderItems, final Date date) {
@@ -90,10 +89,6 @@ public class Order {
                 .sum();
     }
 
-    public BenefitForm getBenefitForm() {
-        return this.benefitForm;
-    }
-
     public int getMaindishCount() {
         return orderItems.stream()
                 .filter(orderItem -> orderItem.getDishCategory() == MAINDISH)
@@ -106,5 +101,9 @@ public class Order {
                 .filter(orderItem -> orderItem.getDishCategory() == DESSERT)
                 .mapToInt(OrderItem::getCount)
                 .sum();
+    }
+
+    public Date getOrderDate() {
+        return this.orderDate;
     }
 }

@@ -1,6 +1,6 @@
-package christmas.benefit.constants;
+package christmas.domain.event.constants;
 
-public enum BenefitConfig {
+public enum EventConfig {
     MINIMUM_EVENT_ORDER_AMOUNT(10_000),
     DDAY_DEFAULT_DISCOUNT_AMOUNT(1_000),
     START_OF_EVENT_MONTH(1),
@@ -12,7 +12,7 @@ public enum BenefitConfig {
 
     private final int value;
 
-    BenefitConfig(final int value) {
+    EventConfig(final int value) {
         this.value = value;
     }
 

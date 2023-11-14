@@ -14,11 +14,10 @@ import static christmas.view.constants.ViewConstants.ORDER_MESSAGE;
 import static christmas.view.constants.ViewConstants.TOTAL_BENEFIT_AMOUNT_MESSAGE;
 import static christmas.view.constants.ViewConstants.TOTAL_ORDER_AMOUNT_MESSAGE;
 
-import christmas.benefit.BenefitForm;
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
-import christmas.domain.constants.Badge;
+import christmas.domain.event.dto.BenefitDTO;
 import christmas.view.constants.ViewConstants;
 import java.util.List;
 
@@ -81,49 +80,41 @@ public class OutputView {
         printNewLine();
     }
 
-    public static void printGift(final BenefitForm benefitForm) {
+    public static void printGift(final int freeChampagneDiscountAmount) {
         printMessage(GIFT_NOTICE_MESSAGE);
 
-        if (benefitForm.getFreeChampagneDiscountAmount() == 샴페인.getPrice()) {
+        if (freeChampagneDiscountAmount == 샴페인.getPrice()) {
             System.out.println(샴페인.name() + " 1개");
         }
 
-        if (benefitForm.getFreeChampagneDiscountAmount() == 0) {
+        if (freeChampagneDiscountAmount == 0) {
             printNothing();
         }
         printNewLine();
     }
 
-    public static void printBenefitForm(final BenefitForm benefitForm) {
+    public static void printBenefitForm(final int totalBenefitAmount, final BenefitDTO benefitDTO) {
         printMessage(BENEFIT_FORM_MESSAGE);
 
-        if (meetBenefitCondition(benefitForm)) {
+        if (totalBenefitAmount == 0) {
             printNothing();
             printNewLine();
             return;
         }
 
-        StringBuilder formattedDiscounts = generateBenefitForm(benefitForm);
+        StringBuilder formattedDiscounts = generateBenefitForm(benefitDTO);
 
         System.out.println(formattedDiscounts);
     }
 
-    private static boolean meetBenefitCondition(final BenefitForm benefitForm) {
-        return benefitForm.getDDayDiscountAmount() == 0 &&
-                benefitForm.getWeekDayDiscountAmount() == 0 &&
-                benefitForm.getSpecialDiscountAmount() == 0 &&
-                benefitForm.getWeekendDiscountAmount() == 0 &&
-                benefitForm.getFreeChampagneDiscountAmount() == 0;
-    }
-
-    private static StringBuilder generateBenefitForm(final BenefitForm benefitForm) {
+    private static StringBuilder generateBenefitForm(final BenefitDTO benefitDTO) {
         StringBuilder formattedDiscounts = new StringBuilder();
 
-        appendDiscount(formattedDiscounts, "크리스마스 디데이 할인", benefitForm.getDDayDiscountAmount());
-        appendDiscount(formattedDiscounts, "평일 할인", benefitForm.getWeekDayDiscountAmount());
-        appendDiscount(formattedDiscounts, "특별 할인", benefitForm.getSpecialDiscountAmount());
-        appendDiscount(formattedDiscounts, "주말 할인", benefitForm.getWeekendDiscountAmount());
-        appendDiscount(formattedDiscounts, "증정 이벤트", benefitForm.getFreeChampagneDiscountAmount());
+        appendDiscount(formattedDiscounts, "크리스마스 디데이 할인", benefitDTO.dDayDiscountAmount());
+        appendDiscount(formattedDiscounts, "특별 할인", benefitDTO.specialDiscountAmount());
+        appendDiscount(formattedDiscounts, "평일 할인", benefitDTO.weekDayDiscountAmount());
+        appendDiscount(formattedDiscounts, "주말 할인", benefitDTO.weekendDiscountAmount());
+        appendDiscount(formattedDiscounts, "증정 이벤트", benefitDTO.freeChampagneDiscountAmount());
 
         return formattedDiscounts;
     }
@@ -136,25 +127,25 @@ public class OutputView {
         }
     }
 
-    public static void printTotalBenefitAmount(final BenefitForm benefitForm) {
+    public static void printTotalBenefitAmount(final int totalBenefitAmount) {
         printMessage(TOTAL_BENEFIT_AMOUNT_MESSAGE);
         System.out.println(
-                String.format("%s원\n", formatNumberWithComma(Math.negateExact(benefitForm.getTotalBenefitAmount()))));
+                String.format("%s원\n", formatNumberWithComma(Math.negateExact(totalBenefitAmount))));
     }
 
-    public static void printFinalPaymentAmount(final Order order) {
+    public static void printFinalPaymentAmount(final int totalOrderAmount, final int totalDiscountAmount) {
         printMessage(FINAL_PAYMENT_AMOUNT_MESSAGE);
         System.out.println(String.format("%s원\n",
-                formatNumberWithComma(order.getTotalOrderAmount() - order.getBenefitForm().getTotalDiscountAmount())));
+                formatNumberWithComma(totalOrderAmount - totalDiscountAmount)));
     }
 
-    public static void printBadge(final Order order) {
+    public static void printBadge(final int totalBenefitAmount) {
         printMessage(BADGE_NOTICE_MESSAGE);
-        if (order.getBenefitForm().getTotalBenefitAmount() < 별.getBenefitAmout()) {
+        if (totalBenefitAmount < 별.getBenefitAmout()) {
             printNothing();
             return;
         }
-        printBadgeIfAmountIsHigher(order.getBenefitForm().getTotalBenefitAmount());
+        printBadgeIfAmountIsHigher(totalBenefitAmount);
     }
 
     private static void printBadgeIfAmountIsHigher(final int totalBenefitAmount) {
