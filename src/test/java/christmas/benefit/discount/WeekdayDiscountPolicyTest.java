@@ -1,16 +1,16 @@
 package christmas.benefit.discount;
 
-import christmas.domain.order.Date;
-import christmas.domain.order.Order;
-import christmas.domain.constants.DayOfWeek;
-import christmas.domain.event.constants.EventConfig;
-import christmas.domain.event.discount.WeekdayDiscountPolicy;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import christmas.domain.constants.DayOfWeek;
+import christmas.domain.event.constants.EventConfig;
+import christmas.domain.event.discount.WeekdayDiscountPolicy;
+import christmas.domain.order.Date;
+import christmas.domain.order.Order;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class WeekdayDiscountPolicyTest {
 

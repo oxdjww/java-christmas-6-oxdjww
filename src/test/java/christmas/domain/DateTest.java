@@ -23,7 +23,7 @@ class DateTest {
     @Test
     @DisplayName("특수 문자로 날짜 생성 시 예외가 발생한다.")
     void createDateWithNonNumeric() {
-      assertInvalidDate("!@#");
+        assertInvalidDate("!@#");
     }
 
     @Test

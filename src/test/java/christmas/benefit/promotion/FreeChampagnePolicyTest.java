@@ -1,7 +1,7 @@
 package christmas.benefit.promotion;
 
-import static christmas.domain.event.constants.EventConfig.MINIMUM_FREE_CHAMPAGNE_ORDER_AMOUNT;
 import static christmas.domain.constants.Menu.샴페인;
+import static christmas.domain.event.constants.EventConfig.MINIMUM_FREE_CHAMPAGNE_ORDER_AMOUNT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import christmas.domain.event.promotion.FreeChampagnePolicy;

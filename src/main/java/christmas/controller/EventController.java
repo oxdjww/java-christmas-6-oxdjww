@@ -9,9 +9,9 @@ import static christmas.view.OutputView.printOrder;
 import static christmas.view.OutputView.printTotalBenefitAmount;
 import static christmas.view.OutputView.printTotalOrderAmount;
 
+import christmas.domain.event.dto.BenefitDTO;
 import christmas.domain.order.Date;
 import christmas.domain.order.Order;
-import christmas.domain.event.dto.BenefitDTO;
 import christmas.service.EventService;
 
 public class EventController {

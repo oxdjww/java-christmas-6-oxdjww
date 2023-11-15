@@ -1,9 +1,9 @@
 package christmas.domain.event.discount;
 
-import christmas.domain.order.Date;
-import christmas.domain.order.Order;
 import christmas.domain.constants.DayOfWeek;
 import christmas.domain.event.constants.EventConfig;
+import christmas.domain.order.Date;
+import christmas.domain.order.Order;
 
 public class WeekendDiscountPolicy implements DiscountPolicy {
     private int weekEndDiscountAmount = 0;

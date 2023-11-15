@@ -1,7 +1,7 @@
 package christmas.domain.event.discount;
 
-import christmas.domain.order.Order;
 import christmas.domain.event.constants.EventConfig;
+import christmas.domain.order.Order;
 
 public class SpecialDiscountPolicy implements DiscountPolicy {
     private int specialDiscountAmount = 0;
