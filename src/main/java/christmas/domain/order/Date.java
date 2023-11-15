@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.order;
 
 import static christmas.domain.constants.DateConstants.MAXIMUM_DATE;
 import static christmas.domain.constants.DateConstants.MINIMUM_DATE;

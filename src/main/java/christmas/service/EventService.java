@@ -1,6 +1,6 @@
 package christmas.service;
 
-import christmas.domain.Order;
+import christmas.domain.order.Order;
 import christmas.domain.event.constants.EventConfig;
 import christmas.domain.event.discount.DDayDiscountPolicy;
 import christmas.domain.event.discount.SpecialDiscountPolicy;
@@ -9,17 +9,14 @@ import christmas.domain.event.discount.WeekendDiscountPolicy;
 import christmas.domain.event.promotion.FreeChampagnePolicy;
 
 public class EventService {
-    private DDayDiscountPolicy dDayDiscountPolicy;
-    private SpecialDiscountPolicy specialDiscountPolicy;
-    private WeekdayDiscountPolicy weekdayDiscountPolicy;
-    private WeekendDiscountPolicy weekendDiscountPolicy;
-    private FreeChampagnePolicy freeChampagnePolicy;
-    private int totalBenefitAmount;
+    private final DDayDiscountPolicy dDayDiscountPolicy;
+    private final SpecialDiscountPolicy specialDiscountPolicy;
+    private final WeekdayDiscountPolicy weekdayDiscountPolicy;
+    private final WeekendDiscountPolicy weekendDiscountPolicy;
+    private final FreeChampagnePolicy freeChampagnePolicy;
+    private final int totalBenefitAmount;
 
-    public EventService() {
-    }
-
-    public void setEvent(final Order order) {
+    public EventService(final Order order) {
         boolean eventEnable = true;
         if (order.getTotalOrderAmount() < EventConfig.MINIMUM_EVENT_ORDER_AMOUNT.getValue()) {
             eventEnable = false;
@@ -36,6 +33,7 @@ public class EventService {
                         + specialDiscountPolicy.getDiscountAmount()
                         + freeChampagnePolicy.getDiscountAmount();
     }
+
 
     public int getDDayDiscountAmount() {
         return this.dDayDiscountPolicy.getDiscountAmount();

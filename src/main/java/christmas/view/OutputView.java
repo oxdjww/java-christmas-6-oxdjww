@@ -14,9 +14,9 @@ import static christmas.view.constants.ViewConstants.ORDER_MESSAGE;
 import static christmas.view.constants.ViewConstants.TOTAL_BENEFIT_AMOUNT_MESSAGE;
 import static christmas.view.constants.ViewConstants.TOTAL_ORDER_AMOUNT_MESSAGE;
 
-import christmas.domain.Date;
-import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.order.Date;
+import christmas.domain.order.Order;
+import christmas.domain.order.OrderItem;
 import christmas.domain.event.dto.BenefitDTO;
 import christmas.view.constants.ViewConstants;
 import java.util.List;

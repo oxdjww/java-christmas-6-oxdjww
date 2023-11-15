@@ -1,7 +1,7 @@
 package christmas.domain.event.discount;
 
-import christmas.domain.Date;
-import christmas.domain.Order;
+import christmas.domain.order.Date;
+import christmas.domain.order.Order;
 import christmas.domain.constants.DayOfWeek;
 import christmas.domain.event.constants.EventConfig;
 

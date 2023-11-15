@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.order;
 
 import static christmas.domain.constants.Category.BEVERAGE;
 import static christmas.domain.constants.Category.DESSERT;
