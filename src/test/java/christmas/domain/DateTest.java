@@ -6,6 +6,7 @@ import static christmas.domain.constants.DayOfWeek.WED;
 import static christmas.exception.constants.ErrorMessage.INVALID_DATE_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import christmas.domain.order.Date;
 import christmas.exception.EventPlannerException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

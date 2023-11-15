@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import christmas.domain.Date;
-import christmas.domain.Order;
+import christmas.domain.order.Date;
+import christmas.domain.order.Order;
 import christmas.domain.event.discount.DDayDiscountPolicy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
